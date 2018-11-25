@@ -1,0 +1,27 @@
+{
+  "name": "daily-coding-problem",
+  "version": "1.0.0",
+  "description": "Solves challenges from dailycodingproblem.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leadiv/daily-coding-problem.git"
+  },
+  "keywords": [
+    "coding",
+    "problems"
+  ],
+  "author": "leadiv <leadiv@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leadiv/daily-coding-problem/issues"
+  },
+  "homepage": "https://github.com/leadiv/daily-coding-problem#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}
