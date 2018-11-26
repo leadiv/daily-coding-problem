@@ -33,4 +33,24 @@ describe('Given a list of numbers and a number k', () => {
 
         expect(actual).toEqual(expected);
     });
+
+    it('should work well when sum is detected in the first two items', () => {
+
+        const theList = [5, 5, 5];
+
+        const expected = true;
+        const actual = hasBinarySumOf(10, theList);
+
+        expect(actual).toEqual(expected);
+    });
+
+    it('should work well when sum is the last two items in the list', () => {
+
+        const theList = [5, 5, 5, 7];
+
+        const expected = true;
+        const actual = hasBinarySumOf(12, theList);
+
+        expect(actual).toEqual(expected);
+    });
 });
