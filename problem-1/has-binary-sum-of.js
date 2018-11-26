@@ -1,11 +1,18 @@
+function createBinarySumTracker(hasBinarySum, differences) {
+
+    return {
+        hasBinarySum,
+        differences
+    };
+}
+
 const isBinarySumOf = (k) => (result, item) => {
 
     return result.hasBinarySum ? (
         result
-    ) : ({
-        hasBinarySum: result.differences.has(item),
-        differences: new Set([...result.differences, k - item])
-    });
+    ) : (
+        createBinarySumTracker(result.differences.has(item), new Set([...result.differences, k - item]))
+    );
 }
 
 
@@ -17,10 +24,5 @@ module.exports = function hasBinarySumOf(k, list) {
         ...rest
     ] = list;
 
-    const init = {
-        hasBinarySum: false,
-        differences: new Set([k - first])
-    };
-
-    return rest.reduce(isBinarySumOf(k), init).hasBinarySum;
+    return rest.reduce(isBinarySumOf(k), createBinarySumTracker(false, new Set([k - first]))).hasBinarySum;
 };
