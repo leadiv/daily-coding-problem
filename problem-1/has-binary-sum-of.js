@@ -1,23 +1,21 @@
-function nextState(hasBinarySum = false, differences = new Set()) {
-
-    return {
-        hasBinarySum,
-        differences
-    };
-}
-
 const isBinarySumOf = (k) => (result, item) => {
 
     return result.hasBinarySum ? (
         result
-    ) : (
-        nextState(result.differences.has(item), new Set([...result.differences, k - item]))
-    );
+    ) : ({
+        hasBinarySum: result.differences.has(item),
+        differences: new Set([...result.differences, k - item])
+    });
 }
 
 
 
 module.exports = function hasBinarySumOf(k, list) {
 
-        return list.reduce(isBinarySumOf(k), nextState()).hasBinarySum;
+        const init = {
+            hasBinarySum: false,
+            differences: new Set()
+        };
+
+        return list.reduce(isBinarySumOf(k), init).hasBinarySum;
 };
