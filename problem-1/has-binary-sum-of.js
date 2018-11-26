@@ -12,10 +12,15 @@ const isBinarySumOf = (k) => (result, item) => {
 
 module.exports = function hasBinarySumOf(k, list) {
 
+    const [
+        first,
+        ...rest
+    ] = list;
+
     const init = {
         hasBinarySum: false,
-        differences: new Set()
+        differences: new Set([k - first])
     };
 
-    return list.reduce(isBinarySumOf(k), init).hasBinarySum;
+    return rest.reduce(isBinarySumOf(k), init).hasBinarySum;
 };
