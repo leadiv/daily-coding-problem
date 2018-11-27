@@ -4,8 +4,8 @@
   "description": "Solves challenges from dailycodingproblem.com",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --watch",
+    "test:single-run": "jest"
   },
   "repository": {
     "type": "git",
