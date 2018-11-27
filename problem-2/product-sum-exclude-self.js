@@ -15,17 +15,16 @@ function productSumExcludeSelf(list) {
     return list.map(divideBy(total))
 }
 
+function excludeIndex(index, list) {
+
+    return list.filter((item, i) => i !== index);
+};
+
 function productSumExcludeSelfNonDivision(list) {
 
     return list.map((item, index, theList) => {
 
-        const before = theList.slice(0, index);
-        const after = theList.slice(index + 1);
-
-        return [
-            ...before,
-            ...after
-        ].reduce(product);
+        return excludeIndex(index, theList).reduce(product);
     });
 }
 
