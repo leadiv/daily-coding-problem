@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+  problem-3:
+    command: ["python", "-m", "unittest", "usr/src/serialize-deserialize.py"]
+    image: python:3
+    volumes:
+      - .:/usr/src
