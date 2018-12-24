@@ -1,34 +1,34 @@
-module.exports = function justifiedSplit(k, lines) {
+const justifyLine = (lineLimit) => (lineWords) => {
 
-    return lines.reduce((all, line) => {
+    const diff = lineLimit - lineWords.join(' ').length;
+    const wordsLen = lineWords.length - 1;
+    const perWord = Math.floor(diff / wordsLen);
+    const extra = diff % wordsLen;
+    const [
+        firstWord,
+        ...rest
+    ] = lineWords;
 
-        const next = `${all.slice(-1)} ${line}`;
+    return [`${firstWord}${''.padStart(extra, ' ')}`, ...rest].join(''.padStart(perWord + 1, ' '));
+};
 
-        if (next.length <= k) {
+const gatherWords = (lineLimit) => (lines, word) => {
 
-            return [
-                ...all.slice(0, -1),
-                next
-            ];
-        } else {
+    const [ lastLine = [] ] = lines.slice(-1);
+    const nextLine = [...lastLine, word];
 
-            return [
-                ...all,
-                line
-            ];
-        }
-    }, []).map((line) => {
+    return nextLine.join(' ').length <= lineLimit ? ([
+        ...lines.slice(0, -1),
+        nextLine
+    ]) : ([
+        ...lines,
+        [ word ]
+    ]);
+};
 
-        const diff = k - line.trim().length;
-        const words = line.trim().split(' ');
-        const wordsLen = words.length - 1;
-        const perWord = Math.floor(diff / wordsLen);
-        const extra = diff % wordsLen;
-        const [
-            firstWord,
-            ...rest
-        ] = words;
 
-        return [`${firstWord}${''.padStart(extra, ' ')}`, ...rest].join(''.padStart(perWord + 1, ' '));
-    });
+
+module.exports = function justifiedSplit(lineLimit, words) {
+
+    return words.reduce(gatherWords(lineLimit), []).map(justifyLine(lineLimit));
 };
